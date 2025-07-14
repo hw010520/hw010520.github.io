@@ -11,8 +11,27 @@ function calculate() {
         alert("血量超過上限");
     }
 
+    let hero_power = document.getElementById('hero_power').checked;
+
     let res = 0;
     while(health>0){
+        
+        if(hero_power && armor == 0 && health <= max_health - 3){
+            hero_power = false;
+            health -= attack;
+            if(health <= 0){
+                break;
+            }
+            health += 2;
+        }
+
+        if(hero_power && armor + health <= attack ){
+            hero_power = false;
+            armor = 0;
+            health = 0;
+            break;
+        }
+
         res += 1
         let heal = Math.min(3, max_health - health);
 
@@ -42,6 +61,7 @@ function calculate() {
                 break;
             }
         }
+        
     }
     document.getElementById('res').textContent = res;
 }
@@ -66,6 +86,9 @@ function calculate() {
     <br>
     <label>場攻</label>
     <input type="number" id="millions" value="0">
+    <br>
+    <label>天生技</label>
+    <input type="checkbox" id="hero_power" value="0">
     <br>
     <br>    
     <input type="button" value="計算" onclick=calculate()>
