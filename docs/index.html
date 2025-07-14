@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<script>
+function calculate() {
+    let armor = parseInt(document.getElementById('armor').value);
+    let health = parseInt(document.getElementById('health').value);
+    let max_health = parseInt(document.getElementById('max_health').value);
+    let attack = parseInt(document.getElementById('attack').value);
+    let res = 0;
+    while(health>0){
+        res += 1
+        let heal = Math.min(3, max_health - health);
+
+        if(armor > 0){
+            if(armor >= attack){
+                armor -= attack;
+            }
+            else{
+                health -= (attack-armor);
+                armor = 0;
+            }
+        }
+        else{
+            health -= attack;
+        }
+        if(health <= 0){
+            break;
+        }
+        health += heal;
+    }
+    document.getElementById('res').textContent = res;
+}
+</script>
+<head>
+    <meta charset="UTF-8">
+    <title>繃帶牧計算機</title>
+</head>
+<body>
+    <h1>繃帶牧計算機</h1>
+    <label>護甲</label>
+    <input type="number" id="armor" value="0">
+    <br>
+    <label>血量</label>
+    <input type="number" id="health" value="30">
+    <br>
+    <label>血量上限</label>
+    <input type="number" id="max_health" value="30">
+    <br>
+    <label>攻擊</label>
+    <input type="number" id="attack" value="7">
+    <br>
+    <br>    
+    <input type="button" value="計算" onclick=calculate()>
+    <br>
+    <br>
+    <label>繃帶量</label>
+    <p id="res">0</p>
+</body>
+</html>
