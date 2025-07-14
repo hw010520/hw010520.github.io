@@ -7,6 +7,9 @@ function calculate() {
     let max_health = parseInt(document.getElementById('max_health').value);
     let attack = parseInt(document.getElementById('attack').value);
     let millions = parseInt(document.getElementById('millions').value);
+    if (health > max_health) {
+        alert("血量超過上限");
+    }
 
     let res = 0;
     while(health>0){
